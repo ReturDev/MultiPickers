@@ -1,9 +1,11 @@
 package github.returdev.multipickers.core
 
 import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 
 
@@ -76,3 +78,19 @@ class PickerState(
     }
 
 }
+
+/**
+ * Creates and remembers a [PickerState] composable.
+ *
+ * @param itemsCount The total number of items in the Picker.
+ * @param itemSelectedIndex The initially selected item index. Defaults to 0.
+ * @param pickerLength The length of the visible picker items, either [PickerLength.SHORT] or [PickerLength.LONG]. Defaults to [PickerLength.SHORT].
+ * @return A remembered [PickerState] composable.
+ */
+@Composable
+fun rememberPickerState(
+    itemsCount: Int,
+    itemSelectedIndex: Int = 0,
+    pickerLength: PickerLength = PickerLength.SHORT
+) = remember { PickerState(itemsCount, itemSelectedIndex, pickerLength) }
+
