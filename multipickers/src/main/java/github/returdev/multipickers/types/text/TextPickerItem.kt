@@ -53,15 +53,11 @@ internal fun TextPickerItem(
         modifier = Modifier
             .fillMaxWidth()
             .graphicsLayer(compositingStrategy = CompositingStrategy.Offscreen)
-            .drawWithContent {
-                drawContent()
-                getBrush(getPickerItemType())?.let {
-                    drawRect(brush = it, blendMode = BlendMode.DstIn)
-                }
-            }
             .drawWithCache {
                 // The type of the PickerItem is retrieved.
                 val itemType = getPickerItemType()
+
+                val brush = getBrush(getPickerItemType())
 
                 // The text is measured with the textStyle modified based on whether the PickerItem is selected or not.
                 val textLayoutResult = measurer.measure(
@@ -89,7 +85,12 @@ internal fun TextPickerItem(
                         ),
                     )
 
+                    brush?.let {
+                        drawRect(brush = it, blendMode = BlendMode.DstIn)
+                    }
+
                 }
+
             }
             .then(modifier),
     )
