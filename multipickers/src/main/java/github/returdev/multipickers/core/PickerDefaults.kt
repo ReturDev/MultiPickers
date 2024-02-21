@@ -28,16 +28,18 @@ object PickerDefaults {
     @Composable
     fun pickerItemColors(
         containerColor: Color = Color.Transparent,
-        disabledContainerColor: Color = containerColor.copy(alpha = 0.5f),
+        disabledContainerColor: Color = Color.Transparent,
         contentColor: Color = LocalContentColor.current,
+        disabledContentColor: Color = contentColor.copy(alpha = 0.5f),
         selectedContentColor: Color = contentColor,
-        disabledContentColor: Color = contentColor.copy(alpha = 0.5f)
+        disabledSelectedContentColor : Color = selectedContentColor.copy(alpha = 0.5f)
     ) = PickerItemColors(
         containerColor = containerColor,
         disabledContainerColor = disabledContainerColor,
         contentColor = contentColor,
+        disabledContentColor = disabledContentColor,
         selectedContentColor = selectedContentColor,
-        disabledContentColor = disabledContentColor
+        disabledSelectedContentColor = disabledSelectedContentColor
     )
 
 }
@@ -56,8 +58,9 @@ class PickerItemColors internal constructor(
     private val containerColor: Color,
     private val disabledContainerColor: Color,
     private val contentColor: Color,
+    private val disabledContentColor: Color,
     private val selectedContentColor: Color,
-    private val disabledContentColor: Color
+    private val disabledSelectedContentColor : Color
 ) {
 
     /**
@@ -84,7 +87,7 @@ class PickerItemColors internal constructor(
         return if (enabled) {
             if (selected) selectedContentColor else contentColor
         } else {
-            disabledContentColor
+            if (selected) disabledSelectedContentColor else disabledContentColor
         }
     }
 
