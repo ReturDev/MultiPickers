@@ -35,6 +35,7 @@ class PickerState(
     private var _selectedIndex by mutableStateOf(
         calculateSelectedItemListIndex(startItemSelectedIndex)
     )
+//    private var _selectedIndex = calculateSelectedItemListIndex(startItemSelectedIndex)
     internal val selectedIndex
         get() = _selectedIndex
 
@@ -45,16 +46,13 @@ class PickerState(
     )
 
     // The index of the first visible item in the Picker.
-    private var _firstVisibleIndex by mutableStateOf(
-        listState.firstVisibleItemIndex
-    )
+    private var _firstVisibleIndex = listState.firstVisibleItemIndex
     internal val firstVisibleIndex : Int
         get() = _firstVisibleIndex
 
     // The index of the last visible item in the Picker.
-    private var _lastVisibleIndex by mutableStateOf(
-        firstVisibleIndex + pickerLength.value - 1
-    )
+    private var _lastVisibleIndex = firstVisibleIndex + pickerLength.value - 1
+
     internal val lastVisibleIndex : Int
         get() = _lastVisibleIndex
 
@@ -76,6 +74,8 @@ class PickerState(
         val startListIndex = (itemsTimesRepeated / 2) * itemsCount
         return startListIndex + itemSelectedIndex
     }
+
+
 
 }
 
