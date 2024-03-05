@@ -16,26 +16,22 @@ object PickerDefaults {
     internal val minPickerWidth = 48.dp
 
     /**
-     * Creates a [PickerItemColors] instance with the specified color values.
+     * This function returns the default colors for the PickerItem.
      *
-     * @param containerColor The color for the item container.
-     * @param disabledContainerColor The color for the item container when disabled.
      * @param contentColor The color for the item content.
-     * @param selectedContentColor The color for the selected item content.
      * @param disabledContentColor The color for the item content when disabled.
-     * @return A [PickerItemColors] instance.
+     * @param selectedContentColor The color for the selected item content.
+     * @param disabledSelectedContentColor The color for the selected item content when disabled.
+     * @return A PickerItemColors object representing the default colors for the PickerItem.
      */
     @Composable
     fun pickerItemColors(
-        containerColor: Color = Color.Transparent,
-        disabledContainerColor: Color = Color.Transparent,
         contentColor: Color = LocalContentColor.current,
         disabledContentColor: Color = contentColor.copy(alpha = 0.5f),
         selectedContentColor: Color = contentColor,
         disabledSelectedContentColor : Color = selectedContentColor.copy(alpha = 0.5f)
     ) = PickerItemColors(
-        containerColor = containerColor,
-        disabledContainerColor = disabledContainerColor,
+
         contentColor = contentColor,
         disabledContentColor = disabledContentColor,
         selectedContentColor = selectedContentColor,
@@ -45,18 +41,15 @@ object PickerDefaults {
 }
 
 /**
- * An immutable class that represents the colors of a PickerItem.
+ * A data class that holds the colors for the PickerItem.
  *
- * @property containerColor The color for the item container.
- * @property disabledContainerColor The color for the item container when disabled.
- * @property contentColor The color for the item content.
- * @property selectedContentColor The color for the selected item content.
- * @property disabledContentColor The color for the item content when disabled.
+ * @param contentColor The color for the item content.
+ * @param disabledContentColor The color for the item content when disabled.
+ * @param selectedContentColor The color for the selected item content.
+ * @param disabledSelectedContentColor The color for the selected item content when disabled.
  */
 @Immutable
 class PickerItemColors internal constructor(
-    private val containerColor: Color,
-    private val disabledContainerColor: Color,
     private val contentColor: Color,
     private val disabledContentColor: Color,
     private val selectedContentColor: Color,
@@ -64,31 +57,29 @@ class PickerItemColors internal constructor(
 ) {
 
     /**
-     * Returns the container color based on whether the PickerItem is enabled or not.
+     * This function returns the content color based on the enabled state.
      *
      * @param enabled A boolean indicating whether the PickerItem is enabled or not.
-     * @return A State<Color> representing the container color.
+     * @return A State<Color> representing the content color.
      */
     @Composable
-    internal fun containerColor(enabled: Boolean): State<Color> {
+    internal fun contentColor(enabled : Boolean) : State<Color> {
         return rememberUpdatedState(
-            if (enabled) containerColor else disabledContainerColor
+            if (enabled) contentColor else disabledContentColor
         )
     }
 
     /**
-     * Returns the content color based on whether the PickerItem is enabled or selected.
+     * This function returns the selected content color based on the enabled state.
      *
      * @param enabled A boolean indicating whether the PickerItem is enabled or not.
-     * @param selected A boolean indicating whether the PickerItem is selected or not.
-     * @return A Color representing the content color.
+     * @return A State<Color> representing the selected content color.
      */
-    internal fun contentColor(enabled: Boolean, selected: Boolean): Color {
-        return if (enabled) {
-            if (selected) selectedContentColor else contentColor
-        } else {
-            if (selected) disabledSelectedContentColor else disabledContentColor
-        }
+    @Composable
+    internal fun selectedContentColor(enabled : Boolean) : State<Color> {
+        return rememberUpdatedState(
+            if (enabled) selectedContentColor else disabledSelectedContentColor
+        )
     }
 
     override fun equals(other: Any?): Boolean {
@@ -97,17 +88,13 @@ class PickerItemColors internal constructor(
 
         other as PickerItemColors
 
-        if (containerColor != other.containerColor) return false
-        if (disabledContainerColor != other.disabledContainerColor) return false
         if (contentColor != other.contentColor) return false
         if (selectedContentColor != other.selectedContentColor) return false
         return disabledContentColor == other.disabledContentColor
     }
 
     override fun hashCode(): Int {
-        var result = containerColor.hashCode()
-        result = 31 * result + disabledContainerColor.hashCode()
-        result = 31 * result + contentColor.hashCode()
+        var result = contentColor.hashCode()
         result = 31 * result + selectedContentColor.hashCode()
         result = 31 * result + disabledContentColor.hashCode()
         return result
