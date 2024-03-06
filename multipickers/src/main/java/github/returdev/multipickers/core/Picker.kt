@@ -1,9 +1,13 @@
 package github.returdev.multipickers.core
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.snapping.rememberSnapFlingBehavior
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.requiredWidth
+import androidx.compose.foundation.layout.requiredWidthIn
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -92,7 +96,8 @@ internal fun Picker(
     LazyColumn(
         modifier = Modifier
             .height(pickerItemHeight * pickerState.pickerLength.value)
-            .defaultMinSize(minWidth = PickerDefaults.minPickerWidth)
+            .widthIn(min = PickerDefaults.minPickerWidth)
+            .then(modifier)
             .graphicsLayer {
                 compositingStrategy = CompositingStrategy.Offscreen
             }
@@ -125,8 +130,7 @@ internal fun Picker(
                     drawRect(brush = brush, blendMode = BlendMode.DstIn)
 
                 }
-            }
-            .then(modifier),
+            },
         state = pickerState.listState,
         userScrollEnabled = isEnabled,
         flingBehavior = rememberSnapFlingBehavior(lazyListState = pickerState.listState)
