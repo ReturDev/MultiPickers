@@ -103,10 +103,10 @@ internal fun Picker(
                     1f to Color.Transparent
                 )
                 val brush2 = Brush.verticalGradient(
-                    0.3f to Color.Transparent,
+                    0.3f to contentColor,
                     0.4f to selectedContentColor,
                     0.6f to selectedContentColor,
-                    0.7f to Color.Transparent
+                    0.7f to contentColor
                 )
                 onDrawWithContent {
                     drawContent()
