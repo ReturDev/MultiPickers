@@ -29,11 +29,10 @@ fun NumberPicker(
     modifier: Modifier = Modifier,
     items: List<Int>,
     pickerItemHeight : Dp,
-    pickerSelectedItemCurvaturePadding : Dp,
-    pickerState: PickerState,
     isEnabled: Boolean = true,
     colors : PickerItemColors = PickerDefaults.pickerItemColors(),
     textStyle : TextStyle = LocalTextStyle.current,
+    pickerState: PickerState
 ) {
     // Converts the list of integers to a list of strings for TextPicker.
     val stringItems = items.map { it.toString() }
@@ -43,7 +42,6 @@ fun NumberPicker(
         modifier = modifier,
         items = stringItems,
         pickerItemHeight = pickerItemHeight,
-        pickerSelectedItemCurvaturePadding = pickerSelectedItemCurvaturePadding,
         pickerState = pickerState,
         isEnabled = isEnabled,
         colors = colors,
