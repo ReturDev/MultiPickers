@@ -6,7 +6,10 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 /**
  * Default values for the Picker composable, including minimum width, and default icon size.
@@ -15,6 +18,11 @@ object PickerDefaults {
 
     internal val minPickerWidth = 48.dp
     internal val minPickerHeight = 32.dp
+
+    val pickerTextStyle = TextStyle(
+        fontSize = 30.sp,
+        fontWeight = FontWeight.Bold
+    )
 
     /**
      * This function returns the default colors for the PickerItem.
