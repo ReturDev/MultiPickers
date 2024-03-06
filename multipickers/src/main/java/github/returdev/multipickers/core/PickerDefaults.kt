@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.dp
 object PickerDefaults {
 
     internal val minPickerWidth = 48.dp
+    internal val minPickerHeight = 32.dp
 
     /**
      * This function returns the default colors for the PickerItem.

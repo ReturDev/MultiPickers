@@ -2,10 +2,12 @@ package github.returdev.multipickers.types.text
 
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.coerceAtLeast
 import github.returdev.multipickers.core.Picker
 import github.returdev.multipickers.core.PickerDefaults
 import github.returdev.multipickers.core.PickerItemColors
@@ -35,9 +37,13 @@ fun TextPicker(
     isEnabled : Boolean = true
 ) {
 
+    val itemHeight = remember(pickerItemHeight) {
+        pickerItemHeight.coerceAtLeast(PickerDefaults.minPickerHeight)
+    }
+
     Picker(
         modifier = modifier,
-        pickerItemHeight = pickerItemHeight,
+        pickerItemHeight = itemHeight,
         color = colors,
         isEnabled = isEnabled,
         pickerState = pickerState
@@ -45,7 +51,7 @@ fun TextPicker(
 
         // Invokes the TextPickerItem composable to represent each item in the TextPicker.
         TextPickerItem(
-            itemHeight = pickerItemHeight,
+            itemHeight = itemHeight,
             text = items[itemIndex],
             color = colors.contentColor(enabled = isEnabled),
             textStyle = textStyle,
