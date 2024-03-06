@@ -11,11 +11,11 @@ import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.ExperimentalTextApi
+import androidx.compose.ui.text.TextMeasurer
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.drawText
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.lerp
-import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.unit.Dp
 
 
@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.Dp
  * @param text The text to be displayed in the TextPickerItem.
  * @param color The color of the text in the TextPickerItem.
  * @param textStyle The style of the text in the TextPickerItem.
+ * @param textMeasurer A TextMeasurer to measure the text in the TextPickerItem.
  * @param getAnimationFloatValue A function that returns a float value for implementing scrolling animations in the Picker.
  */
 @OptIn(ExperimentalTextApi::class)
@@ -37,11 +38,9 @@ internal fun TextPickerItem(
     text: String,
     color : State<Color>,
     textStyle: TextStyle,
+    textMeasurer: TextMeasurer,
     getAnimationFloatValue : () -> Float,
 ) {
-
-    // Remember a TextMeasurer to measure the text
-    val measurer = rememberTextMeasurer()
 
     // Remember a TextStyle for the normal (non-selected) text
     val normalTextStyle = remember(textStyle) {
@@ -66,7 +65,7 @@ internal fun TextPickerItem(
                 )
 
                 // Measure the text with the final TextStyle
-                val textLayoutResult = measurer.measure(
+                val textLayoutResult = textMeasurer.measure(
                     text,
                     finalTextStyle,
                 )
