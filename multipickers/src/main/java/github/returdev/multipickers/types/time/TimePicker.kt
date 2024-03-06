@@ -40,13 +40,6 @@ fun TimePicker(
     isEnabled : Boolean = true
 ) {
 
-    /**
-     * The height of the picker.
-     * It is calculated by coercing the pickerItemHeight to be at least the minimum picker height.
-     */
-    val pickerHeight = remember(pickerItemHeight) {
-        pickerItemHeight.coerceAtLeast(PickerDefaults.minPickerHeight)
-    }
 
     /**
      * The layout of the TimePicker.
@@ -54,7 +47,7 @@ fun TimePicker(
      * The items in the row are spaced by 8.dp and aligned vertically in the center.
      */
     Row(
-        modifier = modifier.width(PickerDefaults.minPickerWidth * 4),
+        modifier = modifier,
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -63,9 +56,8 @@ fun TimePicker(
          * It is a TextPicker with the hours range as items.
          */
         TextPicker(
-            modifier = Modifier.weight(1f),
             items = TimePickerUtil.hourStringRange,
-            pickerItemHeight = pickerHeight,
+            pickerItemHeight = pickerItemHeight,
             pickerState = pickerState.hourPickerState,
             colors = colors,
             textStyle = textStyle,
@@ -83,9 +75,8 @@ fun TimePicker(
          * It is a TextPicker with the seconds and minutes range as items.
          */
         TextPicker(
-            modifier = Modifier.weight(1f),
             items = TimePickerUtil.secondsAndMinutesStringRange,
-            pickerItemHeight = pickerHeight,
+            pickerItemHeight = pickerItemHeight,
             pickerState = pickerState.minutePickerState,
             colors = colors,
             textStyle = textStyle,
@@ -103,9 +94,8 @@ fun TimePicker(
          * It is a TextPicker with the seconds and minutes range as items.
          */
         TextPicker(
-            modifier = Modifier.weight(1f),
             items = TimePickerUtil.secondsAndMinutesStringRange,
-            pickerItemHeight = pickerHeight,
+            pickerItemHeight = pickerItemHeight,
             pickerState = pickerState.secondPickerState,
             colors = colors,
             textStyle = textStyle,

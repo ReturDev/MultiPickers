@@ -17,7 +17,6 @@ import androidx.compose.ui.unit.sp
 object PickerDefaults {
 
     internal val minPickerWidth = 48.dp
-    internal val minPickerHeight = 32.dp
 
     val pickerTextStyle = TextStyle(
         fontSize = 30.sp,
