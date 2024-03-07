@@ -2,16 +2,12 @@ package github.returdev.multipickers.types.time
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.width
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import github.returdev.multipickers.core.PickerDefaults
@@ -23,17 +19,17 @@ import github.returdev.multipickers.types.text.TextPicker
  * This composable function creates a TimePicker.
  *
  * @param modifier The modifier to be applied to the TimePicker. Defaults to [Modifier].
- * @param pickerItemHeight The height of each item in the picker.
+ * @param pickerItemHeight The height of each item in the picker. Defaults to 0.dp.
  * @param pickerState The state of the picker.
  * @param colors The colors to be used for the picker items. Defaults to [PickerDefaults.pickerItemColors()].
  * @param textStyle The text style to be used for the picker items. Defaults to a bold headline medium style from the current MaterialTheme.
  * @param isEnabled Whether the picker is enabled or not. Defaults to true.
  */
-@OptIn(ExperimentalComposeUiApi::class)
+@ExperimentalComposeUiApi
 @Composable
 fun TimePicker(
     modifier : Modifier = Modifier,
-    pickerItemHeight : Dp,
+    pickerItemHeight : Dp = 0.dp,
     pickerState : TimePickerState,
     colors : PickerItemColors = PickerDefaults.pickerItemColors(),
     textStyle : TextStyle = PickerDefaults.pickerTextStyle,
@@ -68,6 +64,7 @@ fun TimePicker(
          */
         Text(
             text = ":",
+            color = colors.selectedContentColor(enabled = isEnabled).value,
             style = textStyle
         )
         /**
@@ -87,6 +84,7 @@ fun TimePicker(
          */
         Text(
             text = ":",
+            color = colors.selectedContentColor(enabled = isEnabled).value,
             style = textStyle
         )
         /**

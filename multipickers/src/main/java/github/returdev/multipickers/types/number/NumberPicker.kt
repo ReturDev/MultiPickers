@@ -1,12 +1,11 @@
 package github.returdev.multipickers.types.number
 
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import github.returdev.multipickers.core.PickerDefaults
 import github.returdev.multipickers.core.PickerItemColors
 import github.returdev.multipickers.core.PickerState
@@ -17,7 +16,7 @@ import github.returdev.multipickers.types.text.TextPicker
  *
  * @param modifier The modifier to be applied to the TextPicker. Defaults to [Modifier].
  * @param items The list of integers to be displayed in the picker.
- * @param pickerItemHeight The height of each item in the picker.
+ * @param pickerItemHeight The height of each item in the picker. Defaults to 0.dp.
  * @param isEnabled Whether the picker is enabled or not. Defaults to true.
  * @param colors The colors to be used for the picker items. Defaults to [PickerDefaults.pickerItemColors()].
  * @param textStyle The text style to be used for the picker items. Defaults to a bold headline medium style from the current MaterialTheme.
@@ -28,11 +27,11 @@ import github.returdev.multipickers.types.text.TextPicker
 fun NumberPicker(
     modifier: Modifier = Modifier,
     items: List<Int>,
-    pickerItemHeight : Dp,
-    isEnabled: Boolean = true,
+    pickerItemHeight : Dp = 0.dp,
+    pickerState: PickerState,
     colors : PickerItemColors = PickerDefaults.pickerItemColors(),
     textStyle : TextStyle = PickerDefaults.pickerTextStyle,
-    pickerState: PickerState
+    isEnabled: Boolean = true
 ) {
     // Converts the list of integers to a list of strings for TextPicker.
     val stringItems = items.map { it.toString() }

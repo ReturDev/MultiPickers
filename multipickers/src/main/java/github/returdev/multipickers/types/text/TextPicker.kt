@@ -24,7 +24,7 @@ import github.returdev.multipickers.core.PickerState
  *
  * @param modifier Modifier to be applied to the TextPicker.
  * @param items The list of text items to be displayed in the TextPicker.
- * @param pickerItemHeight The height of each item in the Picker.
+ * @param pickerItemHeight The height of each item in the Picker. Defaults to 0.dp.
  * @param pickerState The state of the Picker, which includes the current selected index and the total number of items.
  * @param colors The colors to be used for the Picker items.
  * @param textStyle The style of the text in the Picker items.
@@ -36,7 +36,7 @@ import github.returdev.multipickers.core.PickerState
 fun TextPicker(
     modifier : Modifier = Modifier,
     items : List<String>,
-    pickerItemHeight : Dp,
+    pickerItemHeight : Dp = 0.dp,
     pickerState: PickerState,
     colors : PickerItemColors = PickerDefaults.pickerItemColors(),
     textStyle : TextStyle = PickerDefaults.pickerTextStyle,
