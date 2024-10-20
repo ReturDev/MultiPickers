@@ -47,6 +47,11 @@ dependencies {
 
 }
 
+val sourcesJar by tasks.registering(Jar::class) {
+    from(android.sourceSets["main"].java.srcDirs) // Incluye las carpetas de código fuente
+    archiveClassifier.set("sources") // Establece el nombre del archivo como "sources"
+}
+
 afterEvaluate{
     publishing {
         publications {
@@ -54,8 +59,12 @@ afterEvaluate{
                 from(components["release"])
                 groupId = "com.github.returdev"
                 artifactId = "multipickers"
-                version = "1.0.0"
+                version = "1.0.1"
+
+                artifact(sourcesJar.get())
+
             }
+
         }
     }
 }
