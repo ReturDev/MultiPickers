@@ -8,6 +8,13 @@ android {
     namespace = "github.returdev.multipickers"
     compileSdk = 34
 
+    publishing{
+        singleVariant("release"){
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
+
     defaultConfig {
         minSdk = 26
 
@@ -47,10 +54,6 @@ dependencies {
 
 }
 
-val sourcesJar by tasks.registering(Jar::class) {
-    from(android.sourceSets["main"].java.srcDirs) // Incluye las carpetas de código fuente
-    archiveClassifier.set("sources") // Establece el nombre del archivo como "sources"
-}
 
 afterEvaluate{
     publishing {
@@ -60,8 +63,6 @@ afterEvaluate{
                 groupId = "com.github.returdev"
                 artifactId = "multipickers"
                 version = "1.0.1"
-
-                artifact(sourcesJar.get())
 
             }
 
