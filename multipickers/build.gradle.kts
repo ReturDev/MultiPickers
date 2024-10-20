@@ -8,11 +8,8 @@ android {
     namespace = "github.returdev.multipickers"
     compileSdk = 34
 
-    publishing{
-        singleVariant("release"){
-            withSourcesJar()
-            withJavadocJar()
-        }
+    tasks.withType<Jar>(){
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     }
 
     defaultConfig {
@@ -45,6 +42,14 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
     }
+
+    publishing{
+        singleVariant("release"){
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
+
 }
 
 dependencies {
@@ -54,18 +59,29 @@ dependencies {
 
 }
 
-
-afterEvaluate{
-    publishing {
-        publications {
-            create<MavenPublication>("release") {
+publishing{
+    publications{
+        register<MavenPublication>("release"){
+            afterEvaluate{
                 from(components["release"])
                 groupId = "com.github.returdev"
                 artifactId = "multipickers"
                 version = "1.0.1"
-
             }
-
         }
     }
 }
+//afterEvaluate{
+//    publishing {
+//        publications {
+//            create<MavenPublication>("release") {
+//                from(components["release"])
+//                groupId = "com.github.returdev"
+//                artifactId = "multipickers"
+//                version = "1.0.1"
+//
+//            }
+//
+//        }
+//    }
+//}
