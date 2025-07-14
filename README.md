@@ -98,7 +98,7 @@ fun NumberPicker() {
         pickerLength = PickerLength.Long
     )
 
-   TimePicker(pickerState = pickerState)
+    NumberPicker(items = numberList, pickerState = pickerState)
 
 }
 ```
@@ -115,7 +115,8 @@ fun TimePickerPreview() {
         initialSecond = 0,
         pickerLength = PickerLength.LONG
     )
-   NumberPicker(items = numberList, pickerState = pickerState)
+
+    TimePicker(pickerState = pickerState)
 
 }
 ```
