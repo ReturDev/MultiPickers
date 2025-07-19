@@ -61,6 +61,9 @@ publishing {
 
             afterEvaluate {
                 from(components["release"])
+                tasks.matching { it.name == "generateMetadataFileForReleasePublication" }.configureEach {
+                    dependsOn("sourceJar", "javadocJar")
+                }
             }
         }
 
