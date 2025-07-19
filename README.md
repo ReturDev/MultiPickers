@@ -38,7 +38,7 @@ dependencyResolutionManagement {
 - Add the dependency
 
 ```
-  implementation ("com.github.returdev:multipickers:$version")
+      implementation("com.github.ReturDev:MultiPickers:1.0.1")
 ```
 </br>
 
