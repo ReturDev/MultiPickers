@@ -38,12 +38,6 @@ android {
         jvmTarget = "1.8"
     }
 
-    publishing {
-        singleVariant("release") {
-            withSourcesJar()
-            withJavadocJar()
-        }
-    }
 }
 
 dependencies {
@@ -61,10 +55,5 @@ afterEvaluate {
                 version = "1.0.1"
             }
         }
-    }
-
-    tasks.matching { it.name == "generateMetadataFileForReleasePublication" }.configureEach {
-        dependsOn("sourcesJar")
-        dependsOn("javadocJar")
     }
 }
