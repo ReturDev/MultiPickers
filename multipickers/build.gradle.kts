@@ -57,6 +57,11 @@ val javadocJar by tasks.registering(Jar::class) {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
+val sourcesJar by tasks.registering(Jar::class) {
+    archiveClassifier.set("sources")
+    from(android.sourceSets["main"].java.srcDirs)
+}
+
 
 afterEvaluate {
     publishing {
@@ -68,10 +73,11 @@ afterEvaluate {
                 version = "1.0.1"
 
                 artifact(javadocJar.get())
+                artifact(sourcesJar.get())
             }
         }
     }
     tasks.named("generateMetadataFileForReleasePublication") {
-        dependsOn(":multipickers:releaseSourcesJar")
+        dependsOn(sourcesJar)
     }
 }
