@@ -52,15 +52,17 @@ dependencies {
 }
 
 
-afterEvaluate {
-    publishing {
-        publications {
-            register<MavenPublication>("release") {
+publishing {
+    publications {
+        create("release", MavenPublication::class) {
+            groupId = "com.github.returdev"
+            artifactId = "multipickers"
+            version = "1.0.1"
+
+            afterEvaluate {
                 from(components["release"])
-                groupId = "com.github.returdev"
-                artifactId = "multipickers"
-                version = "1.0.1"
             }
         }
+
     }
 }
