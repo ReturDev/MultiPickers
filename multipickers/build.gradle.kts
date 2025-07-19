@@ -57,6 +57,12 @@ val javadocJar by tasks.registering(Jar::class) {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
+tasks.matching { it.name == "generateMetadataFileForReleasePublication" }
+    .configureEach {
+        dependsOn(tasks.named("sourcesJar"))
+    }
+
+
 afterEvaluate {
     publishing {
         publications {
