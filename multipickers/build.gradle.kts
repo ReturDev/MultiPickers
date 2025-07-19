@@ -41,6 +41,7 @@ android {
     publishing {
         singleVariant("release") {
             withSourcesJar()
+            withJavadocJar()
         }
     }
 }
@@ -48,12 +49,6 @@ android {
 dependencies {
     implementation(platform("androidx.compose:compose-bom:2025.07.00"))
     implementation("androidx.compose.material3:material3")
-}
-
-val androidSourcesJar by tasks.registering(Jar::class) {
-    archiveClassifier.set("sources")
-    from("src/main/java")
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
 
@@ -65,9 +60,6 @@ afterEvaluate {
                 groupId = "com.github.returdev"
                 artifactId = "multipickers"
                 version = "1.0.1"
-
-                artifact(androidSourcesJar.get())
-
             }
         }
     }
