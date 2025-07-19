@@ -3,7 +3,7 @@
     <img alt="Multipickers-Banner" src="https://github.com/ReturDev/ReTurDev/assets/79228896/8a662f94-4814-4584-9e93-9ae1c1961bc1" width="600"/>
   </a>
   
-  [![Release](https://img.shields.io/badge/Release-v1.0.0-%231afc05?style=flat)](https://jitpack.io/#ReturDev/MultiPickers)
+  [![Release](https://img.shields.io/badge/Release-v1.0.1-%231afc05?style=flat)](https://jitpack.io/#ReturDev/MultiPickers)
   [![License](https://img.shields.io/badge/License-Apache%202.0-blue?style=flat)](http://www.apache.org/licenses/LICENSE-2.0)
   [![API](https://img.shields.io/badge/API-26%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=26)
   
