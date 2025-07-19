@@ -51,21 +51,22 @@ dependencies {
     implementation("androidx.compose.material3:material3")
 }
 
-tasks.register<Jar>("javadocJar") {
+val javadocJar by tasks.registering(Jar::class) {
     archiveClassifier.set("javadoc")
     from(tasks.dokkaJavadoc)
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
-publishing {
-    publications {
-        register<MavenPublication>("release") {
-            afterEvaluate {
+afterEvaluate {
+    publishing {
+        publications {
+            register<MavenPublication>("release") {
                 from(components["release"])
                 groupId = "com.github.returdev"
                 artifactId = "multipickers"
                 version = "1.0.1"
 
-                artifact(tasks["javadocJar"])
+                artifact(javadocJar.get())
             }
         }
     }
