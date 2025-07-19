@@ -51,21 +51,20 @@ dependencies {
     implementation("androidx.compose.material3:material3")
 }
 
-
-publishing {
-    publications {
-        create("release", MavenPublication::class) {
-            groupId = "com.github.returdev"
-            artifactId = "multipickers"
-            version = "1.0.1"
-
-            afterEvaluate {
+afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("release") {
                 from(components["release"])
-                tasks.matching { it.name == "generateMetadataFileForReleasePublication" }.configureEach {
-                    dependsOn("sourceJar", "javadocJar")
-                }
+                groupId = "com.github.returdev"
+                artifactId = "multipickers"
+                version = "1.0.1"
             }
         }
+    }
 
+    tasks.matching { it.name == "generateMetadataFileForReleasePublication" }.configureEach {
+        dependsOn("sourcesJar")
+        dependsOn("javadocJar")
     }
 }
