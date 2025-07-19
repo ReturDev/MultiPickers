@@ -1,7 +1,6 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
-    id("org.jetbrains.dokka") version "2.0.0"
     id("maven-publish")
     id("org.jetbrains.kotlin.plugin.compose")
 }
@@ -51,15 +50,10 @@ dependencies {
     implementation("androidx.compose.material3:material3")
 }
 
-val javadocJar by tasks.registering(Jar::class) {
-    archiveClassifier.set("javadoc")
-    from(tasks.dokkaJavadoc)
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-}
-
-val sourcesJar by tasks.registering(Jar::class) {
+val androidSourcesJar by tasks.registering(Jar::class) {
     archiveClassifier.set("sources")
-    from(android.sourceSets["main"].java.srcDirs)
+    from("src/main/java")
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
 
@@ -72,12 +66,9 @@ afterEvaluate {
                 artifactId = "multipickers"
                 version = "1.0.1"
 
-                artifact(javadocJar.get())
-                artifact(sourcesJar.get())
+                artifact(androidSourcesJar.get())
+
             }
         }
-    }
-    tasks.named("generateMetadataFileForReleasePublication") {
-        dependsOn(sourcesJar)
     }
 }
